@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfAppDemoExam2.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppDemoExam2"
+        mc:Ignorable="d"
+        Title="The Program" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Content="User: "/>
+            <Label x:Name="userNameLabel" Content="Guest"/>
+        </StackPanel>
+
+        <Button Content="Sign Out" DockPanel.Dock="Top" HorizontalAlignment="Right" Width="100" x:Name="signOutButton" Click="signOutButton_Click"/>
+
+        <ScrollViewer>
+            <ItemsControl x:Name="itemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:BookControl />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
