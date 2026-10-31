@@ -1,0 +1,97 @@
+﻿<Window x:Class="WpfShopAppSaikou.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfShopAppSaikou"
+        mc:Ignorable="d"
+        Title="Изменить товар"
+        Height="450" Width="800" MinWidth="300" MinHeight="400" FontFamily="Times New Roman" FontSize="11pt"
+        WindowStartupLocation="CenterOwner">
+    <DockPanel Margin="10">
+        <TextBlock FontSize="18" Text="Товар" DockPanel.Dock="Top" Margin="5,10"/>
+        
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Наименование товара"/>
+            <TextBox Grid.Column="1" x:Name="productNameBox" Margin="10,0"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Категория товара"/>
+            <ComboBox Grid.Column="1" x:Name="cathegoryComboBox" Margin="10,0"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Описание товара"/>
+            <TextBox Grid.Column="1" x:Name="productDescBox" Margin="10,0"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Производитель"/>
+            <ComboBox Grid.Column="1" x:Name="manuComboBox" Margin="10,0"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Поставщик"/>
+            <ComboBox Grid.Column="1" x:Name="providerComboBox" Margin="10,0"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Цена товара"/>
+            <TextBox Grid.Column="1" x:Name="productPriceBox" Margin="10,0"/>
+            <TextBlock Grid.Column="2" Text="руб."/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Кол-во на складе"/>
+            <TextBox Grid.Column="1" x:Name="productQuantityBox" Margin="10,0"/>
+        </Grid>
+
+        <Grid DockPanel.Dock="Top" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Действующая скидка"/>
+            <TextBox Grid.Column="1" x:Name="productDiscountBox" Margin="10,0"/>
+            <TextBlock Grid.Column="2" Text="%"/>
+        </Grid>
+
+        
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="25px" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Сохранить" x:Name="saveButton" Padding="10,0" Margin="10,0" Click="saveButton_Click"/>
+            <Button Content="Отмена" x:Name="cancelButton" Padding="10,0" Click="cancelButton_Click"/>
+        </StackPanel>
+
+    </DockPanel>
+</Window>

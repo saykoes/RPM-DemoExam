@@ -1,0 +1,31 @@
+﻿<Window x:Class="WpfShopAppSaikou.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfShopAppSaikou"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" MinWidth="350" MinHeight="200"
+        FontFamily="Times New Roman" FontSize="11pt">
+    <DockPanel>
+        <Grid Margin="10" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Поиск:" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" x:Name="searchField" Margin="10,0" VerticalContentAlignment="Center" />
+            <Button x:Name="addButton" Grid.Column="2" Padding="10,5" Content="Добавить" Click="addButton_Click"/>
+        </Grid>
+        <ScrollViewer>
+            <ItemsControl x:Name="itemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:ShopItemControl ProductDeleted="ShopItemControl_ProductDeleted"/>
+                    </DataTemplate> 
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
