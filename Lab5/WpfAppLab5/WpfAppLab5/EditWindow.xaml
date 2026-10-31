@@ -1,0 +1,101 @@
+﻿<Window x:Class="WpfAppLab5.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppLab5"
+        mc:Ignorable="d"
+        Title="Товар" Height="800" Width="450" WindowStartupLocation="CenterOwner" FontFamily="Arial" FontSize="13">
+
+    <Window.Resources>
+        <local:ImageSourceConverter x:Key="imgConverter"/>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        
+   
+    <DockPanel Margin="10">
+        <TextBlock FontSize="18" Text="Товар" DockPanel.Dock="Top" Margin="5,10"/>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+                <Button DockPanel.Dock="Right" x:Name="imageChangeButton" Content="Изменить..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Padding="10,2" Click="imageChangeButton_Click"/>
+            <Image x:Name="ProductImage" Source="{Binding ImagePath,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource imgConverter}}" 
+                   Stretch="Uniform" MaxWidth="300px"/>
+        </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Артикул товара"/>
+                <TextBox x:Name="productId" Margin="10,0" Text="{Binding PkId, UpdateSourceTrigger=PropertyChanged}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Наименование товара"/>
+            <TextBox x:Name="productName" Margin="10,0" Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Категория товара"/>
+            <ComboBox x:Name="cathegoryComboBox" Margin="10,0"
+                      DisplayMemberPath="CategoryName" 
+                      SelectedValuePath="PkId" 
+                      SelectedValue="{Binding FkCategoryId, UpdateSourceTrigger=PropertyChanged}"
+                      />
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Описание товара"/>
+            <TextBox x:Name="productDescBox" Margin="10,0"
+                     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Производитель"/>
+            <ComboBox x:Name="manuComboBox" Margin="10,0"
+                      DisplayMemberPath="ManufacturerName" 
+                      SelectedValuePath="PkId" 
+                      SelectedValue="{Binding FkManufacturerId, UpdateSourceTrigger=PropertyChanged}"
+                      />
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock  DockPanel.Dock="Left" Text="Поставщик"/>
+            <ComboBox x:Name="providerComboBox" Margin="10,0"
+                      DisplayMemberPath="SupplierName" 
+                      SelectedValuePath="PkId" 
+                      SelectedValue="{Binding FkSupplierId, UpdateSourceTrigger=PropertyChanged}"
+                      />
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Цена товара"/>
+            <TextBlock DockPanel.Dock="Right" Text="руб."/>
+            <TextBox x:Name="productPriceBox" Margin="10,0"
+                     Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Кол-во на складе"/>
+            <TextBox x:Name="productQuantityBox" Margin="10,0"
+                     Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Измерение"/>
+            <TextBox x:Name="unitBox" Margin="10,0"
+                     Text="{Binding UnitName, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" Margin="5">
+            <TextBlock DockPanel.Dock="Left" Text="Действующая скидка"/>
+            <TextBlock DockPanel.Dock="Right" Text="%"/>
+            <TextBox Grid.Column="1" x:Name="productDiscountBox" Margin="10,0"
+                     Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="25px" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Сохранить" x:Name="saveButton" Padding="10,0" Margin="10,0" Click="saveButton_Click"/>
+            <Button Content="Отмена" x:Name="cancelButton" Padding="10,0" Click="cancelButton_Click"/>
+        </StackPanel>
+
+    </DockPanel>
+    </ScrollViewer>
+</Window>

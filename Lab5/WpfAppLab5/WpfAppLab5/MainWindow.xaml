@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfAppLab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppLab5"
+        mc:Ignorable="d"
+        Title="Войдите в систему" Height="450" Width="450" MinHeight="200" MinWidth="300" FontFamily="Arial" FontSize="13" WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Resources/icon.ico">
+    <Grid>
+
+        <DockPanel VerticalAlignment="Center" Margin="40">
+            <TextBlock Text="Логин" DockPanel.Dock="Top"/>
+            <TextBox x:Name="loginBox" DockPanel.Dock="Top"/>
+            <TextBlock Text="Пароль" DockPanel.Dock="Top"/>
+            <PasswordBox x:Name="passwordBox" DockPanel.Dock="Top"/>
+            <Button x:Name="signInButton" Content="Войти" Margin="0,10,0,5" DockPanel.Dock="Top" Background="#4B0082" Foreground="White" Click="signInButton_Click"/>
+            <Button x:Name="guestButton" Content="Гость" DockPanel.Dock="Top" Click="guestButton_Click"/>
+        </DockPanel>
+        
+    </Grid>
+</Window>
