@@ -1,0 +1,27 @@
+﻿<Window x:Class="Lab1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab1"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="450" FontFamily="Times New Roman" FontSize="11pt"
+        WindowStartupLocation="CenterScreen">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel Orientation="Vertical" Width="400px" >
+            <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Text="Log into the system"/>
+            <StackPanel Orientation="Vertical" Margin="10" >
+                <TextBlock Text="Login"/>
+                <TextBox Name="loginField" Margin="10,0,0,0" Width="300px" Text="94d5ous@gmail.com"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Text="Password"/>
+                <PasswordBox Name="passwordField" Margin="10,0,0,0" Width="300px" Password="uzWC67"/>
+            </StackPanel>
+            <Button Name="Auth" Content="Log In" Background="Aquamarine" Margin="10" Width="380px" Click="Auth_Click"/>
+
+            <Button Name="Guest" Margin="10" Content="Guest" Background="LightPink" Width="100px" HorizontalAlignment="Right" Click="Guest_Click" />
+        </StackPanel>
+        
+    </Grid>
+</Window>
