@@ -5,10 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppLab7"
         mc:Ignorable="d"
-        Title="EditWindow" Height="650" Width="450" WindowStartupLocation="CenterOwner" FontFamily="Calibri" MinHeight="300" MinWidth="400">
+        Title="Товар" Height="650" Width="450" WindowStartupLocation="CenterOwner" FontFamily="Calibri" MinHeight="300" MinWidth="400" Icon="/Resources/icon.ico">
 
     <Window.Resources>
         <local:ImageSourceConverter x:Key="imgConverter"/>
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel>
+                <!-- The original TextBox or ComboBox -->
+                <AdornedElementPlaceholder x:Name="placeholder"/>
+
+                <!-- Error message right underneath -->
+                <TextBlock Text="{Binding [0].ErrorContent}" 
+                       Foreground="Red" 
+                       FontSize="11" 
+                       Margin="5"/>
+            </StackPanel>
+        </ControlTemplate>
+
+        <!-- Automatically apply this template to all TextBoxes and ComboBoxes -->
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}"/>
+            <!-- Space for the error text -->
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Margin" Value="0,0,0,16"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Margin" Value="0,0,0,16"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Window.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
@@ -29,7 +62,7 @@
 
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <TextBlock DockPanel.Dock="Left" Text="Наименование: "/>
-                <TextBox Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+                <TextBox Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
             </DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Margin="5">
@@ -54,7 +87,7 @@
 
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <TextBlock DockPanel.Dock="Left" Text="Цена: "/>
-                <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"/>
             </DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Margin="5">
@@ -64,18 +97,18 @@
 
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <TextBlock DockPanel.Dock="Left" Text="Количество на складе: "/>
-                <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, TargetNullValue=''}"/>
+                <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, TargetNullValue='', ValidatesOnExceptions=True}"/>
             </DockPanel>
 
             <DockPanel DockPanel.Dock="Top" Margin="5">
                 <TextBlock DockPanel.Dock="Left" Text="Действующая скидка: "/>
-                <TextBox Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, TargetNullValue=''}"/>
+                <TextBox Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, TargetNullValue='', ValidatesOnExceptions=True}"/>
             </DockPanel>
 
             <DockPanel DockPanel.Dock="Bottom">
                 
                 <Button x:Name="cancelButton" Content="Отмена" DockPanel.Dock="Right" Padding="10,2" Margin="5" Click="cancelButton_Click"/>
-                <Button x:Name="saveButton" Content="Сохранить" DockPanel.Dock="Right" Padding="10,2" Margin="5" Click="saveButton_Click"/>
+                <Button x:Name="saveButton" Content="Сохранить" DockPanel.Dock="Right" Padding="10,2" Margin="5" Click="saveButton_Click" />
                 <Button x:Name="deleteButton" Content="Удалить" DockPanel.Dock="Left" Padding="10,2" Margin="5" Click="deleteButton_Click" Visibility="Collapsed" IsEnabled="False"/>
                 <Label/>
             </DockPanel>

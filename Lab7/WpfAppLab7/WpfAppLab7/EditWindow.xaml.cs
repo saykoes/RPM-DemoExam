@@ -41,13 +41,15 @@ namespace WpfAppLab7
                 deleteButton.Visibility = Visibility.Visible;
                 isNewProduct = false;
                 deleteButton.IsEnabled = true;
-            } else
+            }
+            else
             {
                 isNewProduct = true;
                 product.PkId = Guid.NewGuid().ToString();
             }
 
-            if (context.OrderProducts.FirstOrDefault(p => p.FkProductId == product.PkId) != null) {
+            if (context.OrderProducts.FirstOrDefault(p => p.FkProductId == product.PkId) != null)
+            {
                 isInOrder = true;
                 deleteButton.IsEnabled = false;
             }
@@ -80,20 +82,18 @@ namespace WpfAppLab7
             this.Close();
         }
 
-        private void OnValidationError(object sender, ValidationErrorEventArgs e)
-        {
-            if (e.Action == ValidationErrorEventAction.Added)
-                _errorCount++;
-            else if (e.Action == ValidationErrorEventAction.Removed)
-                _errorCount--;
-
-            saveButton.IsEnabled = _errorCount == 0;
-        }
-
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            this.Close();
+            if (_currentProduct.IsValid())
+            {
+                this.DialogResult = true;
+                this.Close();
+
+            }
+            else
+            {
+                MessageBox.Show("Заполните все обязательные поля корректно.", "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)

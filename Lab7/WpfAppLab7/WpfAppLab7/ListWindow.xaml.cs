@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -162,6 +163,57 @@ namespace WpfAppLab7
             var result = newEdit.ShowDialog();
             
             if (result == false) return;
+
+            if (!string.IsNullOrEmpty(newEdit.SelectedAbsolutePath))
+            {
+                string extension = System.IO.Path.GetExtension(newEdit.SelectedAbsolutePath);
+                string newFileName = Guid.NewGuid().ToString() + extension;
+                string targetDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+
+                if (!Directory.Exists(targetDirectory))
+                {
+                    Directory.CreateDirectory(targetDirectory);
+                }
+
+                string destinationPath = System.IO.Path.Combine(targetDirectory, newFileName);
+
+                try
+                {
+                    File.Copy(newEdit.SelectedAbsolutePath, destinationPath, overwrite: true);
+                    newProduct.Image = newFileName;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при копироавнии файла: {ex}", "Ошибка копирования", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+            _context.Products.Add(newProduct);
+            _context.SaveChanges();
+            LoadItems();
+            _productsSource.View.Refresh();
+        }
+
+        private void deleteImage(string ImgPath)
+        {
+            string targetDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+            var deleteImgPath = System.IO.Path.Combine(targetDirectory, ImgPath);
+
+            if (!Directory.Exists(targetDirectory))
+            {
+                var msg_res = MessageBox.Show($"Ошибка при удалении изображения: не существующая директория. Продолжить удаление в любом случае?",
+                    "Ошибка удаления", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (msg_res == MessageBoxResult.No) return;
+            }
+
+            try
+            {
+                File.Delete(deleteImgPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении файла: {ex}", "Ошибка удаления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void productButton_Click(object sender, RoutedEventArgs e)
@@ -176,14 +228,57 @@ namespace WpfAppLab7
 
             if (clickedProduct == null) return;
 
-            Product productCopy = (Product)_context.Entry(clickedProduct).CurrentValues.ToObject(); 
+            Product productCopy = (Product)_context.Entry(clickedProduct).CurrentValues.ToObject();
+            string? originalImgPath = clickedProduct.Image;
 
             var newEdit = new EditWindow(productCopy, _context);
             var result = newEdit.ShowDialog();
 
             if (result == false) return;
 
-            
+            if (string.IsNullOrEmpty(productCopy.PkId))
+            {
+                // delete the original product!!
+
+                if (clickedProduct.Image != null) deleteImage(clickedProduct.Image);
+
+                _context.Remove(clickedProduct);
+                _context.SaveChanges();
+                _products.Remove(clickedProduct);
+                _productsSource.View.Refresh();
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(newEdit.SelectedAbsolutePath))
+            {
+                string extension = System.IO.Path.GetExtension(newEdit.SelectedAbsolutePath);
+                string newFileName = Guid.NewGuid().ToString() + extension;
+                string targetDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+
+                if (!Directory.Exists(targetDirectory)) 
+                { 
+                    Directory.CreateDirectory(targetDirectory);
+                }
+
+                string destinationPath = System.IO.Path.Combine(targetDirectory, newFileName);
+
+                try
+                {
+                    File.Copy(newEdit.SelectedAbsolutePath, destinationPath, overwrite: true);
+                    productCopy.Image = newFileName;
+
+                    if (originalImgPath != null) deleteImage(originalImgPath); // delete the original image if ok
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при копироавнии файла: {ex}", "Ошибка копирования", MessageBoxButton.OK, MessageBoxImage.Error);
+                } 
+
+            }
+
+            _context.Entry(clickedProduct).CurrentValues.SetValues(productCopy);
+            _context.SaveChanges();
+            _productsSource.View.Refresh();
         }
 
         private void discountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -55,6 +55,16 @@ namespace WpfAppLab7.Models
                         if (FkCategoryId == null || FkCategoryId <= 0)
                             error = "Выберите категорию.";
                         break;
+
+                    case nameof(FkManufacturerId):
+                        if (FkManufacturerId == null || FkManufacturerId <= 0)
+                            error = "Выберите производителя.";
+                        break;
+
+                    case nameof(FkSupplierId):
+                        if (FkSupplierId == null || FkSupplierId <= 0)
+                            error = "Выберите поставщика.";
+                        break;
                 }
                 return error;
             }
@@ -69,7 +79,9 @@ namespace WpfAppLab7.Models
                    string.IsNullOrEmpty(this[nameof(Price)]) &&
                    string.IsNullOrEmpty(this[nameof(Discount)]) &&
                    string.IsNullOrEmpty(this[nameof(Quantity)]) &&
-                   string.IsNullOrEmpty(this[nameof(FkCategoryId)]);
+                   string.IsNullOrEmpty(this[nameof(FkCategoryId)])&&
+                   string.IsNullOrEmpty(this[nameof(FkManufacturerId)])&&
+                   string.IsNullOrEmpty(this[nameof(FkSupplierId)]);
         }
     }
 

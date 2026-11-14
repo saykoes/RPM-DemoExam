@@ -20,11 +20,11 @@
             </Grid.ColumnDefinitions>
 
             <Border BorderThickness="2" BorderBrush="Black" Margin="5" >
-                <Image Source="{Binding Image, Converter={StaticResource ImgConverter}}" Stretch="Uniform"/>
+                <Image Source="{Binding Image, Converter={StaticResource ImgConverter}}" Stretch="Uniform" Margin="5"/>
             </Border>
 
             <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black" Margin="5,5,1,5" >
-                <StackPanel>
+                <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding FkCategory.CategoryName}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
                         <TextBlock Text="|" FontWeight="Bold" />

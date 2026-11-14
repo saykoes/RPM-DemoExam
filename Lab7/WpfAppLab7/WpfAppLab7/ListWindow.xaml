@@ -24,6 +24,8 @@
                 <ComboBoxItem Content="15% и более" Tag="High"/>
             </ComboBox>
 
+            <TextBlock DockPanel.Dock="Right" Text="Скидка: " TextAlignment="Center" VerticalAlignment="Center"/>
+            
             <ComboBox DockPanel.Dock="Right" x:Name="filterBox" Margin="5" SelectionChanged="filterBox_SelectionChanged">
                 <ComboBoxItem Content="Без сортировки" IsSelected="True"/>
                 <ComboBoxItem Content="Наименование (А-Я)"/>
