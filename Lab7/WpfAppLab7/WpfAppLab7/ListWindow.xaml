@@ -9,13 +9,40 @@
         Icon="/Resources/icon.ico"
         WindowStartupLocation="CenterScreen">
     <DockPanel>
-        <TextBlock x:Name="nameBox" Text="Гость" DockPanel.Dock="Top"/>
-        <Button x:Name="exitButton" Content="Выйти" DockPanel.Dock="Top" Click="exitButton_Click" />
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock x:Name="nameBox" Text="Гость" Padding="4,2" Margin="5" DockPanel.Dock="Left"/>
+            <Button x:Name="exitButton" Content="Выйти" Padding="4,2" Margin="5" DockPanel.Dock="Right" Click="exitButton_Click" />
+            <Button x:Name="addButton" Content="Добавить товар" Padding="4,2" Margin="5" DockPanel.Dock="Right" Click="addButton_Click" Visibility="Collapsed" />
+            <Label DockPanel.Dock="Right"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top" x:Name="searchFilterDock" Visibility="Collapsed">
+            <ComboBox DockPanel.Dock="Right" x:Name="discountBox" Margin="5" SelectionChanged="discountBox_SelectionChanged">
+                <ComboBoxItem Content="Все диапазоны" Tag="All" IsSelected="True"/>
+                <ComboBoxItem Content="0 - 10,99%" Tag="Low"/>
+                <ComboBoxItem Content="11 - 14,99%" Tag="Medium"/>
+                <ComboBoxItem Content="15% и более" Tag="High"/>
+            </ComboBox>
+
+            <ComboBox DockPanel.Dock="Right" x:Name="filterBox" Margin="5" SelectionChanged="filterBox_SelectionChanged">
+                <ComboBoxItem Content="Без сортировки" IsSelected="True"/>
+                <ComboBoxItem Content="Наименование (А-Я)"/>
+                <ComboBoxItem Content="Наименование (Я-А)" />
+                <ComboBoxItem Content="Цена (сначала недорогие)"/>
+                <ComboBoxItem Content="Цена (сначала дорогие)"/>
+            </ComboBox>
+            
+            <TextBlock DockPanel.Dock="Right" Text="Сортировка: " TextAlignment="Center" VerticalAlignment="Center"/>
+
+            <TextBlock Text="Поиск: " VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <TextBox x:Name="searchBox" VerticalAlignment="Center" Margin="5" TextChanged="searchBox_TextChanged"/>
+        </DockPanel>
+
         <ScrollViewer>
             <ItemsControl x:Name="itemsControl" HorizontalContentAlignment="Stretch">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button x:Name="productButton" Background="Transparent" BorderBrush="Transparent" Padding="0" HorizontalContentAlignment="Stretch">
+                        <Button x:Name="productButton" Background="Transparent" BorderBrush="Transparent" Padding="0" HorizontalContentAlignment="Stretch" Click="productButton_Click">
                             <local:ProductControl HorizontalAlignment="Stretch"/>
                         </Button>
                     </DataTemplate>

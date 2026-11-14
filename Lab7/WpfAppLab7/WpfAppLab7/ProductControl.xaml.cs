@@ -31,7 +31,7 @@ namespace WpfAppLab7
                 if (p.Discount > 0)
                 {
                     OldPrice.Text = p.Price.ToString();
-                    NewPrice.Text = (p.Price - (p.Price / 100 * p.Discount)).ToString();
+                    NewPrice.Text = p.FinalPrice.ToString();
                 }
 
                 if (p.Discount >= 20)

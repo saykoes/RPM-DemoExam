@@ -27,6 +27,8 @@ public partial class Product
 
     public string? Image { get; set; }
 
+    public double? FinalPrice => Price * (1 - Discount / 100);
+
     public virtual Category? FkCategory { get; set; }
 
     public virtual Manufacturer? FkManufacturer { get; set; }
@@ -34,4 +36,5 @@ public partial class Product
     public virtual Supplier? FkSupplier { get; set; }
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+
 }

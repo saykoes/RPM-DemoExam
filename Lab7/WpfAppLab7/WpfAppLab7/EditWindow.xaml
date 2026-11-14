@@ -5,8 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppLab7"
         mc:Ignorable="d"
-        Title="EditWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="EditWindow" Height="650" Width="450" WindowStartupLocation="CenterOwner" FontFamily="Calibri" MinHeight="300" MinWidth="400">
+
+    <Window.Resources>
+        <local:ImageSourceConverter x:Key="imgConverter"/>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <DockPanel Margin="10">
+            <TextBlock FontSize="18" Text="Товар" DockPanel.Dock="Top" Margin="5,10"/>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <Button x:Name="imageChangeButton" DockPanel.Dock="Right" Content="Изменить..." HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Margin="10" Padding="10,2" Click="imageChangeButton_Click"/>
+                <Image x:Name="productImage" Source="{Binding Image, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource imgConverter}}" 
+                       Stretch="Uniform" MaxWidth="300px" Height="200px"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Артикул: "/>
+                <TextBlock Text="{Binding PkId}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Наименование: "/>
+                <TextBox Text="{Binding ProductName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Категория: "/>
+                <ComboBox x:Name="categoryComboBox" DisplayMemberPath="CategoryName" SelectedValuePath="PkId" SelectedValue="{Binding FkCategoryId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Описание: "/>
+                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Производитель: "/>
+                <ComboBox x:Name="manuComboBox" DisplayMemberPath="ManufacturerName" SelectedValuePath="PkId" SelectedValue="{Binding FkManufacturerId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5"> 
+                <TextBlock DockPanel.Dock="Left" Text="Поставщик: "/>
+                <ComboBox x:Name="supplierComboBox" DisplayMemberPath="SupplierName" SelectedValuePath="PkId" SelectedValue="{Binding FkSupplierId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Цена: "/>
+                <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Единица измерения: "/>
+                <TextBox Text="{Binding Measurement, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Количество на складе: "/>
+                <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, TargetNullValue=''}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Top" Margin="5">
+                <TextBlock DockPanel.Dock="Left" Text="Действующая скидка: "/>
+                <TextBox Text="{Binding Discount, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, TargetNullValue=''}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Bottom">
+                
+                <Button x:Name="cancelButton" Content="Отмена" DockPanel.Dock="Right" Padding="10,2" Margin="5" Click="cancelButton_Click"/>
+                <Button x:Name="saveButton" Content="Сохранить" DockPanel.Dock="Right" Padding="10,2" Margin="5" Click="saveButton_Click"/>
+                <Button x:Name="deleteButton" Content="Удалить" DockPanel.Dock="Left" Padding="10,2" Margin="5" Click="deleteButton_Click" Visibility="Collapsed" IsEnabled="False"/>
+                <Label/>
+            </DockPanel>
+            
+            <Label />
+
+        </DockPanel>
+    </ScrollViewer>
 </Window>
